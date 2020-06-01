@@ -1,0 +1,20 @@
+<form [formGroup]="conferenceForm">
+  <app-person-data-input-form (changedValue)="getPerson($event)" *ngIf="!isUserLoggedIn"></app-person-data-input-form>
+  <app-labeled-input [isRegularTextInput]="true" [type]='"text"' [formName]='"conferenceName"' [labelText]='"Conference Name"' [formGroup]="conferenceForm"></app-labeled-input>
+  <app-labeled-input [isRegularTextInput]="true" [type]='"number"' [formName]='"expectedNumberOfParticipants"' [labelText]='"Expected Number Of Participants"' [formGroup]="conferenceForm"></app-labeled-input>
+  <!--Todo unify-->
+  <div [formGroup]="conferenceForm">
+    <label for="conferenceRoom">
+      Choose conference room
+    </label>
+    <br>
+    <select id="conferenceRoom" formControlName="conferenceRoom">
+      <option [ngClass]="expectedNumberOfParticipantsExceedsMaximumSeats() ? 'text-danger' : ''" [title]="expectedNumberOfParticipantsExceedsMaximumSeats() ? 'Expected number of Participants exceeds maximum seats in the conference room. It\'s recommended to choose conference room with more seats' : ''" *ngFor="let room of conferenceRooms" [ngValue]="room">{{room.name}}</option>
+    </select>
+  </div>
+  <app-labeled-input [isDatePicker]="true" [type]='"text"' [formName]='"conferenceDate"' [labelText]='"Conference Date"' [formGroup]="conferenceForm"></app-labeled-input>
+  <app-labeled-input [isTimePicker]="true" [type]='"text"' [formName]='"conferenceTime"' [labelText]='"Conference Time"' [formGroup]="conferenceForm"></app-labeled-input>
+  <div>
+    <button type="button" (click)="submit()">Create</button>
+  </div>
+</form>

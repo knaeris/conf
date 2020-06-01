@@ -1,0 +1,15 @@
+<div [formGroup]="formGroup">
+  <label>
+    {{labelText}}
+  </label>
+  <br>
+  <div *ngIf="isRegularTextInput">
+    <app-input-field [formGroup]="formGroup" [type]="type" [formName]="formName"></app-input-field>
+  </div>
+    <div *ngIf="isDatePicker">
+      <app-input-datepicker [formGroup]="formGroup" [type]="type" [formName]="formName"></app-input-datepicker>
+    </div>
+    <div *ngIf="isTimePicker">
+      <ngb-timepicker *ngIf="isTimePicker" formControlName="{{formName}}"></ngb-timepicker>
+    </div>
+</div>

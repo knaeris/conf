@@ -1,0 +1,15 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink routerLink="/new-conference">New Conference</a>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink routerLink="/manage">Manage</a>
+  </li>
+  <li [ngbNavItem]="3" >
+    <a *ngIf="!isUserLoggedIn" ngbNavLink [routerLink]='"/login"'>Login</a>
+    <a *ngIf="isUserLoggedIn" ngbNavLink [routerLink]='"/login"' (click)="logout()" class="text-danger" >Logout</a>
+  </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+  <router-outlet></router-outlet>

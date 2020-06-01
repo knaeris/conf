@@ -1,0 +1,4 @@
+<div [formGroup]="formGroup">
+  <input id="{{formName}}" type="{{type}}" formControlName="{{formName}}" ngbDatepicker #d="ngbDatepicker">
+  <button (click)="d.toggle()">Choose date</button>
+</div>

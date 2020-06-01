@@ -1,0 +1,5 @@
+<form [formGroup]="personDataForm">
+  <app-labeled-input [isRegularTextInput]="true" [type]='"text"' [formName]='"firstName"' [labelText]='"First Name"' [formGroup]="personDataForm"></app-labeled-input>
+  <app-labeled-input [isRegularTextInput]="true" [type]='"text"' [formName]='"lastName"' [labelText]='"Last Name"' [formGroup]="personDataForm"></app-labeled-input>
+  <app-labeled-input [isDatePicker]="true" [type]='"text"' [formName]='"dateOfBirth"' [labelText]='"Date Of Birth"' [formGroup]="personDataForm"></app-labeled-input>
+</form>

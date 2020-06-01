@@ -1,0 +1,13 @@
+<p>Participants:</p>
+<ul>
+  <li *ngFor="let participant of conference?.participants">
+    {{participant.person.firstName + " " + participant.person.lastName + " " + participant.person.dateOfBirth}}
+    <a href="javascript:void(0)" title="Remove participant" class="text-danger" (click)="remove(participant)">x</a>
+  </li>
+</ul>
+<!-- Todo unify-->
+<p>Add participant:</p>
+<app-person-data-input-form (changedValue)="getPerson($event)"> </app-person-data-input-form>
+    <button (click)="addParticipant()">Add Participant</button>
+<br>
+<button class="btn-danger" (click)="cancelConference()">Cancel</button>

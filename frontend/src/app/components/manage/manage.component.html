@@ -1,0 +1,24 @@
+<ngb-alert *ngIf="!isUserLoggedIn" [type]='"warning"' [dismissible]="false">"You must be logged in to manage your conferences. You will be directed to login page"</ngb-alert>
+<div *ngIf="isUserLoggedIn">
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>Conferences Hosted by me</a>
+    <ng-template ngbNavContent>
+      <app-conference-list (hosted)=true></app-conference-list>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Conferences I'm going to visit</a>
+    <ng-template ngbNavContent>
+      <app-conference-list (visit)="true"></app-conference-list>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3" >
+    <a ngbNavLink>History</a>
+    <ng-template ngbNavContent>
+      <app-conference-list (history)="true"></app-conference-list>
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
