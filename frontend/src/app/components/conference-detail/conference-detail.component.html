@@ -1,13 +1,17 @@
-<p>Participants:</p>
+<a>Conference: {{conference?.name}}  <span *ngIf="conference?.cancelled" class="text-danger">(Canceled)</span></a>
+<p>Location: {{conference?.conferenceRoom.name}}</p>
+<p>Hosted by: {{conference?.host?.personData?.firstName}} {{conference?.host?.personData?.lastName}}</p>
+<p>Participants(<span>{{conference?.participants?.length}}/{{conference?.conferenceRoom?.maxSeats}}</span>):</p>
 <ul>
   <li *ngFor="let participant of conference?.participants">
-    {{participant.person.firstName + " " + participant.person.lastName + " " + participant.person.dateOfBirth}}
-    <a href="javascript:void(0)" title="Remove participant" class="text-danger" (click)="remove(participant)">x</a>
+    {{participant?.personData?.firstName + " " + participant?.personData?.lastName + " " + participant?.personData?.dateOfBirth}}
+    <a (click)="remove(participant)" class="text-danger" href="javascript:void(0)" title="Remove participant">x</a>
   </li>
 </ul>
-<!-- Todo unify-->
-<p>Add participant:</p>
-<app-person-data-input-form (changedValue)="getPerson($event)"> </app-person-data-input-form>
-    <button (click)="addParticipant()">Add Participant</button>
-<br>
-<button class="btn-danger" (click)="cancelConference()">Cancel</button>
+<div *ngIf="!conference?.cancelled">
+  <p>Add participant:</p>
+  <app-person-data-input-form (changedValue)="getPerson($event)"></app-person-data-input-form>
+  <br>
+  <button (click)="addParticipant()">Add Participant</button>
+  <button (click)="cancelConference()" class="btn-danger">Cancel</button>
+</div>

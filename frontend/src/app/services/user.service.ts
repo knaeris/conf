@@ -1,46 +1,48 @@
 import {BaseService} from './base-service';
-import {Host} from '../model/host';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {User} from '../model/user';
-import {Person} from '../model/person';
+import {PersonData} from '../model/person-data';
+import {SignUpRequest} from "../model/sign-up-request";
+import {LoginRequest} from "../model/login-request";
+import {map} from "rxjs/operators";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends BaseService {
 
-  userLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(this.loggedInUser);
+  loginHeaders = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'noToken': 'true'
+    })
+  };
 
-  set loggedInUser(value) {
-    sessionStorage.setItem('userData', value);
-    this.userLoggedIn.next(true);
-    console.log('edastan ' + true);
+  getSignedInUser(): User {
+    return JSON.parse(sessionStorage.getItem('userData')) as User;
   }
 
-  static get loggedInUser(){
-    return sessionStorage.getItem('userData');
+  isUserSignedIn(): boolean {
+    return !!this.getSignedInUser();
   }
 
-  static getLoggedInUser(): User {
-   return JSON.parse(this.loggedInUser) as User;
-  }
-
-  static isUserLoggedIn(): boolean{
-    return this.getLoggedInUser() ? true : false;
-  }
-
-  logOut(): void{
+  signOut(): void {
     sessionStorage.removeItem('userData');
-    this.userLoggedIn.next(false);
   }
 
-  logIn(person: Person): Subscription {
-    const user: User = new User(person);
-    return super.post('users', user).subscribe(response => {
-      if (response) {
-        this.loggedInUser = JSON.stringify(response);
-      }
-    });
+  signUp(signUpRequest: SignUpRequest) {
+    return super.postWithHeaders('auth/signup', signUpRequest, this.loginHeaders).subscribe(response => {
+      console.log(response);
+    })
+  }
+
+  signIn(loginRequest: LoginRequest) {
+    return super.postWithHeaders('auth/signin', loginRequest, this.loginHeaders).pipe(map(result => UserService.storeUser(result)));
+  }
+
+  private static storeUser(user: User): void {
+    sessionStorage.setItem('userData', JSON.stringify(user));
   }
 }

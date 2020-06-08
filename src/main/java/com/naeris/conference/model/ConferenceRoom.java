@@ -12,12 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @RequiredArgsConstructor
 public class ConferenceRoom {
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	private String name;
+    private String name;
 
-	private Location location;
+    private Location location;
 
-	private Integer maxSeats;
+    private Integer maxSeats;
 }

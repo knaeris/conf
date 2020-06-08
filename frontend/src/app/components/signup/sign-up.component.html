@@ -1,0 +1,25 @@
+<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+  <label for="username">
+    Username
+  </label>
+  <br>
+  <div>
+    <input formControlName="username" id="username" type="text"/>
+  </div>
+  <label for="password">
+  Password
+</label>
+  <br>
+  <div>
+    <input formControlName="password" id="password" type="password"/>
+  </div>
+  <label for="confirmedPassword">
+    Confirm Password
+  </label>
+  <br>
+  <div>
+    <input [ngClass]="signUpForm.controls['confirmedPassword'].valid ? '' : 'text-danger'" formControlName="confirmedPassword" id="confirmedPassword" type="password"/>
+  </div>
+  <app-person-data-input-form (changedValue)="getPersonData($event)"></app-person-data-input-form>
+  <input type="submit" value="Sign up" [disabled]="!signUpForm.valid"/>
+</form>

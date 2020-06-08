@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Conference} from '../../model/conference';
 import {ConferenceService} from '../../services/conference-service';
 import {ActivatedRoute} from '@angular/router';
 import {Participant} from '../../model/participant';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {Person} from '../../model/person';
+import {PersonData} from '../../model/person-data';
 
 @Component({
   selector: 'app-conference-detail',
@@ -14,7 +13,7 @@ import {Person} from '../../model/person';
 export class ConferenceDetailComponent implements OnInit {
 
   conference: Conference;
-  personToAddAsParticipant: Person;
+  personData: PersonData;
 
   constructor(private conferenceService: ConferenceService, private route: ActivatedRoute) {
   }
@@ -34,37 +33,36 @@ export class ConferenceDetailComponent implements OnInit {
 
   cancelConference(): void {
     this.conferenceService.cancel(this.conference).subscribe(response => {
-      if (response){
+      if (response) {
         this.conference.cancelled = response.cancelled;
       }
     });
   }
 
   remove(participant: Participant): void {
-    this.conferenceService.removeParticipantFromConference(participant, this.conference).subscribe(response => {
-      if (response){
+    this.conferenceService.removeParticipant(participant, this.conference).subscribe(response => {
+      if (response) {
         this.conference.participants = response.participants;
       }
     });
   }
 
   addParticipant(): void {
-    const participant: Participant = new Participant(this.personToAddAsParticipant);
-    this.conferenceService.addParticipantToConference(participant, this.conference).subscribe(response => {
-      if (response){
+    this.conferenceService.addNewParticipant(this.personData, this.conference).subscribe(response => {
+      if (response) {
         this.conference.participants = response.participants;
       }
     });
 
   }
 
+  getPerson(value: any) {
+    this.personData = value as PersonData;
+  }
+
   private createDateString(date: any): string {
     return date.year.toString().padStart(4, '0')
       + '-' + date.month.toString().padStart(2, '0')
       + '-' + date.day.toString().padStart(2, '0');
-  }
-
-  getPerson(value: any){
-    this.personToAddAsParticipant = value as Person;
   }
 }

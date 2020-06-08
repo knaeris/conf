@@ -1,20 +1,45 @@
-<form [formGroup]="conferenceForm">
-  <app-person-data-input-form (changedValue)="getPerson($event)" *ngIf="!isUserLoggedIn"></app-person-data-input-form>
-  <app-labeled-input [isRegularTextInput]="true" [type]='"text"' [formName]='"conferenceName"' [labelText]='"Conference Name"' [formGroup]="conferenceForm"></app-labeled-input>
-  <app-labeled-input [isRegularTextInput]="true" [type]='"number"' [formName]='"expectedNumberOfParticipants"' [labelText]='"Expected Number Of Participants"' [formGroup]="conferenceForm"></app-labeled-input>
-  <!--Todo unify-->
+<form [formGroup]="conferenceForm" (ngSubmit)="submit()">
+  <label for="conferenceName">
+    Conference name
+  </label>
+  <br>
+  <div>
+    <input formControlName="conferenceName" id="conferenceName" type="text" minlength="6" required/>
+  </div>
+  <label for="expectedNumberOfParticipants">
+    Expected Number Of Participants
+  </label>
+  <br>
+  <div>
+    <input formControlName="expectedNumberOfParticipants" id="expectedNumberOfParticipants" type="number"/>
+  </div>
   <div [formGroup]="conferenceForm">
     <label for="conferenceRoom">
       Choose conference room
     </label>
     <br>
-    <select id="conferenceRoom" formControlName="conferenceRoom">
-      <option [ngClass]="expectedNumberOfParticipantsExceedsMaximumSeats() ? 'text-danger' : ''" [title]="expectedNumberOfParticipantsExceedsMaximumSeats() ? 'Expected number of Participants exceeds maximum seats in the conference room. It\'s recommended to choose conference room with more seats' : ''" *ngFor="let room of conferenceRooms" [ngValue]="room">{{room.name}}</option>
+    <select formControlName="conferenceRoom" id="conferenceRoom">
+      <option *ngFor="let room of conferenceRooms"
+              [ngClass]="expectedNumberOfParticipantsExceedsMaximumSeats() ? 'text-danger' : ''"
+              [ngValue]="room"
+              [title]="expectedNumberOfParticipantsExceedsMaximumSeats() ? 'Expected number of Participants exceeds maximum seats in the conference room. It\'s recommended to choose conference room with more seats' : ''">{{room.name}}</option>
     </select>
   </div>
-  <app-labeled-input [isDatePicker]="true" [type]='"text"' [formName]='"conferenceDate"' [labelText]='"Conference Date"' [formGroup]="conferenceForm"></app-labeled-input>
-  <app-labeled-input [isTimePicker]="true" [type]='"text"' [formName]='"conferenceTime"' [labelText]='"Conference Time"' [formGroup]="conferenceForm"></app-labeled-input>
+  <label for="conferenceDate">
+    Conference Date
+  </label>
+  <br>
   <div>
-    <button type="button" (click)="submit()">Create</button>
+    <ngb-datepicker #dp formControlName="conferenceDate" id="conferenceDate" required></ngb-datepicker>
+  </div>
+  <label for="conferenceTime">
+    Conference Time
+  </label>
+  <br>
+  <div>
+    <ngb-timepicker formControlName="conferenceTime" id="conferenceTime"></ngb-timepicker>
+  </div>
+  <div>
+    <input type="submit" value="Create"/>
   </div>
 </form>

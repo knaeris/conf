@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from './services/user.service';
 import {Router} from '@angular/router';
 
@@ -7,30 +7,32 @@ import {Router} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'frontend';
-  active = 1;
-  isUserLoggedIn: boolean;
+  active = 0;
 
   constructor(private userService: UserService, private router: Router) {
   }
 
-  logout(): void {
-    this.userService.logOut();
+  signOut(): void {
+    this.userService.signOut();
+  }
+
+  isUserSignedIn(): boolean {
+    return this.userService.isUserSignedIn();
   }
 
   ngOnInit(): void {
-     this.userService.userLoggedIn.subscribe(() => {
-       this.isUserLoggedIn = UserService.isUserLoggedIn();
-    });
-     this.router.events.subscribe( v => {
+    this.router.events.subscribe(v => {
       const route: string = this.router.url;
-      if(route === '/login'){
+      if (route === '/login') {
         this.active = 3;
-      } else if(route === '/manage'){
+      } else if (route === '/manage') {
         this.active = 2;
-      } else {
+      } else if (route === '/new-conference'){
         this.active = 1;
+      } else {
+        this.active = 0;
       }
     });
   }

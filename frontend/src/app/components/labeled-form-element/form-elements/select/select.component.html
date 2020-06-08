@@ -1,0 +1,6 @@
+<div [formGroup]="formGroup">
+  <select formControlName="{{formElementName}}" id="{{formElementName}}">
+    <option *ngFor="let iterable of iterables" [ngValue]="iterable"
+            class="{{ formElementClass }}" title="{{formElementTitle}}">{{iterable?.name}}</option>
+  </select>
+</div>

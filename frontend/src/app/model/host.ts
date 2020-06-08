@@ -1,9 +1,11 @@
 import {User} from './user';
+import {PersonData} from "./person-data";
 
 export class Host {
-  user: User;
 
-  constructor(user: User) {
-    this.user = user;
+  personData: PersonData;
+
+  constructor(personData: PersonData) {
+    this.personData = personData;
   }
 }

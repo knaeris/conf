@@ -1,19 +1,17 @@
 package com.naeris.conference.model;
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Document
 @RequiredArgsConstructor
 @Setter
 @Getter
+@AllArgsConstructor
 public class Host {
 
-	private User user;
-
-	private Set<Conference> hostedConferences = new HashSet<>();
+    private PersonData personData;
 }

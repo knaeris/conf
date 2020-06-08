@@ -17,22 +17,22 @@ import java.util.Set;
 @Getter
 public class Conference {
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	private String name;
+    private String name;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime dateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dateTime;
 
-	private Host host;
+    private Host host;
 
-	private ConferenceRoom conferenceRoom;
+    private ConferenceRoom conferenceRoom;
 
-	private Integer expectedNumberOfParticipants;
+    private Integer expectedNumberOfParticipants;
 
-	private Set<Participant> participants = new HashSet<>();
+    private Set<Participant> participants = new HashSet<>();
 
-	private boolean cancelled = false;
+    private boolean cancelled = false;
 
 }

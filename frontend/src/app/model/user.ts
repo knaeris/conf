@@ -1,9 +1,7 @@
-import {Person} from './person';
+import {PersonData} from './person-data';
 
 export class User {
-  person: Person;
-
-  constructor(person: Person) {
-    this.person = person;
-  }
+  username: string;
+  personData: PersonData;
+  token: string;
 }

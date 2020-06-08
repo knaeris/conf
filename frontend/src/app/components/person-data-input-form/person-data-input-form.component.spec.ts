@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PersonDataInputFormComponent } from './person-data-input-form.component';
+import {PersonDataInputFormComponent} from './person-data-input-form.component';
 
 describe('PersonDataInputFormComponent', () => {
   let component: PersonDataInputFormComponent;
@@ -8,9 +8,9 @@ describe('PersonDataInputFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonDataInputFormComponent ]
+      declarations: [PersonDataInputFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Person} from '../../model/person';
-import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {PersonData} from '../../model/person-data';
+import {NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -12,13 +12,13 @@ import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 export class PersonDataInputFormComponent implements OnInit {
 
   personDataForm: FormGroup;
-  @Output() changedValue = new EventEmitter<{person: Person}>();
+  @Output() changedValue = new EventEmitter<{ personData: PersonData }>();
 
-  constructor(private formBuilder: FormBuilder, private ngbDateParserFormatter: NgbDateParserFormatter) {
+  constructor(private formBuilder: FormBuilder, private ngbDateParserFormatter: NgbDateParserFormatter, private calendar: NgbCalendar) {
     this.personDataForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      dateOfBirth: [this.todayDate()]
+      firstName: '',
+      lastName: '',
+      dateOfBirth: calendar.getToday()
     });
   }
 
@@ -27,19 +27,10 @@ export class PersonDataInputFormComponent implements OnInit {
   }
 
   onChange() {
-    this.personDataForm.valueChanges.subscribe( val => {
-      const person: Person = new Person(this.value('firstName'),  this.value('lastName'), this.ngbDateParserFormatter.format(this.value('dateOfBirth')));
-      this.changedValue.emit({person});
+    this.personDataForm.valueChanges.subscribe(val => {
+      const personData: PersonData = new PersonData(this.value('firstName'), this.value('lastName'), this.ngbDateParserFormatter.format(this.value('dateOfBirth')));
+      this.changedValue.emit({personData});
     });
-  }
-
-  todayDate(): object {
-    const now: Date = new Date();
-    return {
-      year: now.getFullYear(),
-      month: now.getMonth(),
-      day: now.getDay()
-    };
   }
 
   value(field: string): any {

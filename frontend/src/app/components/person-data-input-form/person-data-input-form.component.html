@@ -1,5 +1,23 @@
 <form [formGroup]="personDataForm">
-  <app-labeled-input [isRegularTextInput]="true" [type]='"text"' [formName]='"firstName"' [labelText]='"First Name"' [formGroup]="personDataForm"></app-labeled-input>
-  <app-labeled-input [isRegularTextInput]="true" [type]='"text"' [formName]='"lastName"' [labelText]='"Last Name"' [formGroup]="personDataForm"></app-labeled-input>
-  <app-labeled-input [isDatePicker]="true" [type]='"text"' [formName]='"dateOfBirth"' [labelText]='"Date Of Birth"' [formGroup]="personDataForm"></app-labeled-input>
+  <label for="firstName">
+    First name
+  </label>
+  <br>
+  <div>
+    <input formControlName="firstName" id="firstName" type="text" required/>
+  </div>
+  <label for="lastName">
+    Last name
+  </label>
+  <br>
+  <div>
+    <input formControlName="lastName" id="lastName" type="text" required/>
+  </div>
+  <label for="dateOfBirth">
+    Date Of Birth
+  </label>
+  <br>
+  <div>
+    <ngb-datepicker #dp formControlName="dateOfBirth" id="dateOfBirth" required></ngb-datepicker>
+  </div>
 </form>

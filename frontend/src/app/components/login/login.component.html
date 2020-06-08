@@ -1,5 +1,19 @@
-<app-person-data-input-form (changedValue)="getPerson($event)"></app-person-data-input-form>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <label for="username">
+    Username
+  </label>
+  <br>
   <div>
-    <br>
-    <button (click)="login()">Login</button>
+    <input formControlName="username" id="username" type="text" minlength="6" required/>
   </div>
+  <label for="password">
+    Password
+  </label>
+  <br>
+  <div>
+    <input formControlName="password" id="password" type="password" minlength="6" required/>
+  </div>
+  <input type="submit" value="Sign in">
+  <br>
+  <a routerLink="/sign-up" >Sign up</a>
+</form>

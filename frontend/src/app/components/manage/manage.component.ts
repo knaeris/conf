@@ -9,23 +9,21 @@ import {Router} from '@angular/router';
 })
 export class ManageComponent implements OnInit, OnDestroy {
 
-  isUserLoggedIn: boolean;
   active = 1;
-  navigateTimeout;
+  redirectTimeout;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.isUserLoggedIn = UserService.isUserLoggedIn();
-    if (!this.isUserLoggedIn) {
-      this.navigateTimeout = setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 3000);
-    }
   }
 
   ngOnDestroy(): void {
-    clearTimeout(this.navigateTimeout);
+    clearTimeout(this.redirectTimeout);
+  }
+
+  isUserSignedIn(): boolean {
+    return this.userService.isUserSignedIn();
   }
 
 }

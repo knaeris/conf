@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NewConferenceFormComponent } from './new-conference-form.component';
+import {NewConferenceFormComponent} from './new-conference-form.component';
 
 describe('NewconferenceformComponent', () => {
   let component: NewConferenceFormComponent;
@@ -8,9 +8,9 @@ describe('NewconferenceformComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewConferenceFormComponent ]
+      declarations: [NewConferenceFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

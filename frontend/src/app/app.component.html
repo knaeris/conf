@@ -1,15 +1,23 @@
-<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-  <li [ngbNavItem]="1">
-    <a ngbNavLink routerLink="/new-conference">New Conference</a>
-  </li>
-  <li [ngbNavItem]="2">
-    <a ngbNavLink routerLink="/manage">Manage</a>
-  </li>
-  <li [ngbNavItem]="3" >
-    <a *ngIf="!isUserLoggedIn" ngbNavLink [routerLink]='"/login"'>Login</a>
-    <a *ngIf="isUserLoggedIn" ngbNavLink [routerLink]='"/login"' (click)="logout()" class="text-danger" >Logout</a>
-  </li>
-</ul>
-
-<div [ngbNavOutlet]="nav" class="mt-2"></div>
-  <router-outlet></router-outlet>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <ul #nav="ngbNav" [(activeId)]="active" class="nav-tabs" ngbNav>
+        <li [ngbNavItem]="0">
+          <a ngbNavLink routerLink="/">Home</a>
+        </li>
+        <li [ngbNavItem]="1">
+          <a ngbNavLink routerLink="/new-conference">New Conference</a>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink routerLink="/manage">Manage</a>
+        </li>
+        <li [ngbNavItem]="3">
+          <a *ngIf="!isUserSignedIn()" routerLink="/login" ngbNavLink>Sign in</a>
+          <a (click)="signOut()" *ngIf="isUserSignedIn()" routerLink="/" class="text-danger" ngbNavLink>Sign out</a>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

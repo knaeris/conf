@@ -8,28 +8,28 @@ import java.util.Arrays;
 
 public enum Location {
 
-	MSBALTICQUEEN("M/S Baltic Queen"),
-	MEGASTAR("Megastar"),
-	STAR("Star");
+    MS_BALTIC_QUEEN("M/S Baltic Queen"),
+    MEGASTAR("Megastar"),
+    STAR("Star");
 
-	private String value;
+    private String value;
 
-	Location(String value) {
-		this.value = value;
-	}
+    Location(String value) {
+        this.value = value;
+    }
 
-	@Override
-	public String toString() {
-		return value;
-	}
+    @JsonCreator
+    public static Location fromText(String text) {
+        return Arrays.stream(Location.values()).filter(location -> location.value.equals(text)).findFirst().orElseThrow(InvalidLocationException::new);
+    }
 
-	@JsonValue
-	public String getValue(){
-		return value;
-	}
+    @Override
+    public String toString() {
+        return value;
+    }
 
-	@JsonCreator
-	public static Location fromText(String text){
-		return Arrays.stream(Location.values()).filter(location -> location.value.equals(text)).findFirst().orElseThrow(InvalidLocationException::new);
-	}
+    @JsonValue
+    public String getValue() {
+        return value;
+    }
 }

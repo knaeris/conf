@@ -1,1 +1,7 @@
-<p>conference-list works!</p>
+<ul>
+  <li *ngFor="let conference of conferences">
+    <a [routerLink]="['/conference-detail', conference.id]">{{conference.name}}  ({{conference.conferenceRoom.name}})
+      <span *ngIf="conference?.cancelled" class="text-danger">(Canceled)</span>
+    </a>
+  </li>
+</ul>
