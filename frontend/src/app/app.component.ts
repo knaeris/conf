@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from './services/user.service';
 import {Router} from '@angular/router';
+import {LoginRequest} from "./model/login-request";
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(()=> {
+      const loginRequest: LoginRequest = new LoginRequest();
+      loginRequest.password = "default";
+      loginRequest.username = "default";
+      this.userService.signIn(loginRequest).subscribe(res => {
+      });
+    },5000);
+
     this.router.events.subscribe(v => {
       const route: string = this.router.url;
       if (route === '/login') {
